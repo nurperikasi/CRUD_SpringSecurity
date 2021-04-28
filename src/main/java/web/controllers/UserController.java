@@ -16,8 +16,7 @@ import java.util.List;
 @RequestMapping("/")
 public class UserController {
 
-    final
-    RoleDao roleDao;
+    private final RoleDao roleDao;
 
     private final UserService userService;
 

@@ -1,4 +1,4 @@
-package web.config.security.service;
+package web.service;
 
 import org.springframework.stereotype.Service;
 import web.Dao.UserDao;
@@ -16,7 +16,7 @@ import java.util.Set;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    final UserDao userDao;
+    private final UserDao userDao;
 
     public UserDetailServiceImpl(UserDao userDao) {
         this.userDao = userDao;

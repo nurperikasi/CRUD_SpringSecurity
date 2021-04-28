@@ -13,10 +13,10 @@ import java.util.List;
 @Transactional
 public class UserDaoImpl implements UserDao{
 
-    final RoleDao roleDao;
+    private final RoleDao roleDao;
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public UserDaoImpl(RoleDao roleDao) {
         this.roleDao = roleDao;

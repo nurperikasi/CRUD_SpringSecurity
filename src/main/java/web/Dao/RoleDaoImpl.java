@@ -15,7 +15,7 @@ import java.util.Set;
 public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public List<Role> getAllRoles() {
         return entityManager.createQuery("select r from Role r", Role.class).getResultList();
