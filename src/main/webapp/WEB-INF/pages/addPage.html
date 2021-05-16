@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="#"
-      th:action="@{/update}"
+      th:action="@{/add}"
       th:object="${user}"
       method="post">
     <input type="hidden" name="id"  th:field="*{id}" value="$*{user.id}">

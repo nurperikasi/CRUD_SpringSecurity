@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService; // сервис, с помощью которого тащим пользователя
-    private final LoginSuccessHandler loginSuccessHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+    private final UserDetailsService userDetailsService;
+    private final LoginSuccessHandler loginSuccessHandler;
 
     public SecurityConfig(@Qualifier("userDetailServiceImpl") UserDetailsService userDetailsService, LoginSuccessHandler loginSuccessHandler) {
         this.userDetailsService = userDetailsService;
@@ -32,13 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .antMatchers("/user").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
                 .successHandler(loginSuccessHandler)
-                .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().logout().permitAll();
 
         http.csrf().disable();
         http.headers().frameOptions().disable();

@@ -39,6 +39,7 @@ public class HiberConfig {
         em.setJpaProperties(additionalProperties());
         return em;
     }
+
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
