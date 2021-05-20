@@ -1,6 +1,8 @@
 package web.controllers;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import web.Dao.RoleDao;
@@ -94,4 +96,11 @@ public class UserController {
         modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
+
+    @GetMapping("/accessDenied")
+    @ResponseBody
+    public ResponseEntity<?> accessDenied() {
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
 }

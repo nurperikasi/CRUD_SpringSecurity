@@ -15,7 +15,7 @@
         <th>Name</th>
         <th>Last Name</th>
         <th>Roles</th>
-        <th sec:autorize="hasAnyAuthority('ADMIN')">Actions</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="user, state : ${allUsers}">
         <td th:utext="${user.id}">Id</td>
@@ -23,16 +23,14 @@
         <td th:utext="${user.lastName}">Last Name</td>
         <td th:utext="${user.roles1}">Roles</td>
 
-        <td><div sec:authorize="hasAnyAuthority('ADMIN')">
+        <td>
             <a th:href="@{/update/{id}(id=${user.id})}">Edit</a>
             <a th:href="@{/delete/{id}(id=${user.id})}">Delete</a>
-        </div>
         </td>
     </tr>
 </table>
-<div sec:authorize="hasAnyAuthority('ADMIN')">
 <a href="/addPage">Add new user</a>
-</div>
+
 <a href="#" th:href="@{/logout}">Log Out</a>
 </body>
 </html>

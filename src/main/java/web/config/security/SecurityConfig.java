@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasAnyAuthority("ADMIN")
                 .antMatchers("/user").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().authenticated()
+                .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler())
                 .and().formLogin().permitAll()
                 .successHandler(loginSuccessHandler)
                 .and().logout().permitAll();
@@ -42,6 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
 
+    }
+
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new CustomAccessDeniedHandler();
     }
 
     @Bean
